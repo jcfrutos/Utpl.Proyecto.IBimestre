@@ -1,18 +1,25 @@
 package com.ats.ats_api.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 public class AtsRendimiento {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String descripcion;
-    private Double rendimiento;
 
-    public AtsRendimiento() {
-    }
+    @Column(name = "campo1")
+    private String campo1;
 
-    public AtsRendimiento(Long id, String descripcion, Double rendimiento) {
-        this.id = id;
-        this.descripcion = descripcion;
-        this.rendimiento = rendimiento;
-    }
+    @Column(name = "campo2")
+    private String campo2;
+
+    @Column(name = "campo3")
+    private String campo3;
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -22,20 +29,28 @@ public class AtsRendimiento {
         this.id = id;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getCampo1() {
+        return campo1;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setCampo1(String campo1) {
+        this.campo1 = campo1;
     }
 
-    public Double getRendimiento() {
-        return rendimiento;
+    public String getCampo2() {
+        return campo2;
     }
 
-    public void setRendimiento(Double rendimiento) {
-        this.rendimiento = rendimiento;
+    public void setCampo2(String campo2) {
+        this.campo2 = campo2;
+    }
+
+    public String getCampo3() {
+        return campo3;
+    }
+
+    public void setCampo3(String campo3) {
+        this.campo3 = campo3;
     }
     
 }

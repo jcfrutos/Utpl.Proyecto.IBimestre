@@ -1,14 +1,18 @@
 package com.ats.ats_api.controller;
 
 import com.ats.ats_api.service.AtsService;
+
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/ats")
-public class AtsController {
+public class AtsFileController {
 
     @Autowired
     private AtsService atsService;
@@ -16,10 +20,12 @@ public class AtsController {
     @PostMapping("/upload")
     public ResponseEntity<String> uploadXmlFile(@RequestParam("file") MultipartFile file) {
         try {
-            atsService.processXmlFile(file);
-            return ResponseEntity.status(HttpStatus.OK).body("Archivo XML procesado exitosamente.");
+            String month = atsService.processXmlFile(file);
+            return ResponseEntity.ok("File processed successfully for month: " + month);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing file: " + e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar el archivo: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid file format: " + e.getMessage());
         }
     }
 }

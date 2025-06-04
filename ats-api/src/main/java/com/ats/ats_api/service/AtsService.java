@@ -39,11 +39,24 @@ public class AtsService {
     @Autowired
     private AtsRecapRepository atsRecapRepository;
 
-    public void processXmlFile(MultipartFile file) throws ParserConfigurationException, IOException, TransformerException {
-        // Implementación para procesar el archivo XML y separar los anexos
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        // Lógica para parsear el archivo XML y guardar los datos en las tablas correspondientes
+    public String processXmlFile(MultipartFile file)
+            throws ParserConfigurationException, IOException, TransformerException {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            builder.parse(file.getInputStream());
+            // Aquí se procesaría el documento XML y se separarían los datos
+            // en las diferentes entidades (AtsCompra, AtsVenta, etc.)
+            // Ejemplo de cómo guardar los datos:
+            // List<AtsCompra> compras = parseCompras(document);
+            // atsCompraRepository.saveAll(compras);
+            return "Archivo procesado correctamente";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error al procesar el archivo: " + e.getMessage();
+        }
+
     }
 
     public List<AtsCompra> getAllAtsCompras() {

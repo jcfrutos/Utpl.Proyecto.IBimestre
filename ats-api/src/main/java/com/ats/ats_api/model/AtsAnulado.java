@@ -1,18 +1,20 @@
 package com.ats.ats_api.model;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 public class AtsAnulado {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String motivoAnulacion;
     private String fechaAnulacion;
-
-    // Constructor
-    public AtsAnulado(Long id, String motivoAnulacion, String fechaAnulacion) {
-        this.id = id;
-        this.motivoAnulacion = motivoAnulacion;
-        this.fechaAnulacion = fechaAnulacion;
-    }
+    private String detalle;
 
     // Getters and Setters
+
     public Long getId() {
         return id;
     }
@@ -36,5 +38,12 @@ public class AtsAnulado {
     public void setFechaAnulacion(String fechaAnulacion) {
         this.fechaAnulacion = fechaAnulacion;
     }
-    
+
+    public String getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
+    }
 }

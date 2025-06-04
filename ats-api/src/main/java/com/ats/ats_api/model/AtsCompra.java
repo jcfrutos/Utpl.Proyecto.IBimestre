@@ -1,12 +1,30 @@
 package com.ats.ats_api.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 public class AtsCompra {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String descripcion;
-    private Double monto;
+
+    @Column(name = "numero_factura")
+    private String numeroFactura;
+
+    @Column(name = "fecha_compra")
     private String fechaCompra;
 
+    @Column(name = "monto")
+    private Double monto;
+
+    @Column(name = "proveedor")
+    private String proveedor;
+
     // Getters and Setters
+
     public Long getId() {
         return id;
     }
@@ -15,12 +33,20 @@ public class AtsCompra {
         this.id = id;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getNumeroFactura() {
+        return numeroFactura;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setNumeroFactura(String numeroFactura) {
+        this.numeroFactura = numeroFactura;
+    }
+
+    public String getFechaCompra() {
+        return fechaCompra;
+    }
+
+    public void setFechaCompra(String fechaCompra) {
+        this.fechaCompra = fechaCompra;
     }
 
     public Double getMonto() {
@@ -31,12 +57,11 @@ public class AtsCompra {
         this.monto = monto;
     }
 
-    public String getFechaCompra() {
-        return fechaCompra;
+    public String getProveedor() {
+        return proveedor;
     }
 
-    public void setFechaCompra(String fechaCompra) {
-        this.fechaCompra = fechaCompra;
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
     }
-    
 }
