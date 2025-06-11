@@ -1,75 +1,99 @@
-workspace "Plataforma de gestion de titulos v3"  {
-    description "Sistema de gestión de titulos"
+workspace "Pago impuestos 103 y 104" {
+    description "Sistema de cuadre y conciliación para el pago de impuestos"
     
     model {
-        pEstudiante = person "Estudiante"
-        pSecretaria = person "Secretaria de carrera"
-        pPrencista = person "Prencista"
+        pUsuario = person "Especialista"
+        pAdministrador = person "Supervisor"
+        pAuditor = person "Auditor"
         
-        sSenescyt = softwareSystem "Senescyt" {
-            tags "Software"
+        sDocElectronicos = softwareSystem "Información de comprobantes autorizados" {
+            
         }
+        sCuadre = softwareSystem "Cuadre y conciliación pago Impuestos" {
+            tags "SistemaCuadre"
+            
+            portalUsuario = container "pagina de revisión y ajuste de cuadre de pago impuestos" {
+                tags "AppWeb"
+                pUsuario -> this "Validación cuadre automático"
+            }
         
-        sGestion = softwareSystem "Plataforma de gestion" {
-            tags "SistemaGestion"
-            
-            portalEstudiante = container "Pagina de visualización" {
+            portalSupervisor = container "pagina de revisión de cuadre final de pago impuestos" {
                 tags "AppWeb"
-                pEstudiante  -> this "Visualiza el título"
+                pAdministrador -> this "Revisar cuadre final"
+                pAuditor -> this "Audita el pago de impuestos"
             }
             
-            portalAdministracion = container "Pagina de administración" {
-                tags "AppWeb"
-                pSecretaria -> this "Generación de título"
-                pPrencista -> this "Imprime el título"
+            sATS = container "toma los Anexos Transaccionales de todos los legados"{
+                tags "almacen"
             }
+            
+            sConta = container "toma la contabilidad de las cuentas de impuestos"
+            
+            bdATS = container "Almacena los ATS depurados y cuadrados que se presentaron al SRI"
             
             api = container "API" {
                 tags "Api"
-                portalAdministracion -> this "Generacion/Impresion"
-                portalEstudiante -> this "Consulta"
-                this -> sSenescyt "Autorizar"
+                sATS -> this "Toma la información ATS"
+                sConta -> this "Toma la información Contabilidad"
+                sDocElectronicos -> this "Toma información de los comprobantes electrónicos"
+                bdATS -> this "Almacena los ATS reportados al SRI por 7 años"
                 
+                ATSComponente = component "ATS Componentes" "Toma el ATS en XML y serapa en Compras, Ventas, Rendimientos y Anulados, y envía a guardar a Base de datos"
+                InsumosComponente = component "Controlador de Insumos" "Permite tomar los insumos cuadrar y cruzar la inforación"
+                LLenadoComponente = component "Llenado de Insumos" "Tomar los Comprobantes electrónicos y la información faltante en el ATS"
                 
-                emailComponente  = component "Email-componente" "Envia notificaciones a los estudiantes"
-                
-                incresoComponente = component "Controlador de ingreso" "Permite el ingreso a los usuarios"
+            }
+            BaseDatosATS = container "Base Datos ATS" {
+                tags "Database"
+                api -> this "Almacena en tabla de Compras, Ventas, Rendimientos y Anulados"
             }
             
-            basedatos = container "Base de datos" {
+            baseDatos = container "Base Datos" {
                 tags "Database"
-                api -> this "Obtener/Crear/Actualizar/Eliminar"
+                api -> this "CrearCruces, eleminar, editar, Actualizar"
             }
         }
         
-    
         
+       
+        
+        
+        sCuadre -> sDocElectronicos "Toma los secuenciales y autorizaciones de comprobantes"
     }
     
     views {
-        systemContext sGestion {
+        systemContext sCuadre {
             include *
             autolayout lr
         }
-        
-        container sGestion {
+        container sCuadre {
             include *
-            autolayout lr
+            autolayout 
         }
-        
         component api "Componentes" {
             include *
-            autolayout lr
+            autolayout
         }
         
         styles {
-            element "SistemaGestion" {
-                shape Circle
-                background #19b92a
-                color #000000
+            element "SistemaCuadre" {
+                shape Hexagon
+                background #f26522
+                color #ffffff
+            }
+            element "almacen" {
+                shape circle
+                background #3393ff
+                color #ffffff
+            }
+            element "Database" {
+                shape cylinder
+                background #85d1e4
+                color #080808
             }
         }
         
         theme "https://srv-si-001.utpl.edu.ec/REST_PRO_ERP/Recursos/Imagenes/themeAZ_2023.json"
     }
+   
 }
