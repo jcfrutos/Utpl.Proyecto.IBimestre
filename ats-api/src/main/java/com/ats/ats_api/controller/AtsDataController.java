@@ -1,12 +1,13 @@
 package com.ats.ats_api.controller;
 
-import com.ats.ats_api.model.AtsCompra;
-import com.ats.ats_api.model.AtsVenta;
-import com.ats.ats_api.model.AtsRendimiento;
-import com.ats.ats_api.model.AtsAnulado;
+import com.ats.ats_api.dtos.AtsAnuladoDto;
+import com.ats.ats_api.dtos.AtsCompraDto;
+import com.ats.ats_api.dtos.AtsRendimientoDto;
+import com.ats.ats_api.dtos.AtsVentaDto;
 import com.ats.ats_api.service.AtsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -18,22 +19,22 @@ public class AtsDataController {
     private AtsService atsService;
 
     @GetMapping("/compras")
-    public List<AtsCompra> getAllAtsCompras() {
+    public List<AtsCompraDto> getAllAtsCompras() {
         return atsService.getAllAtsCompras();
     }
 
     @GetMapping("/ventas")
-    public List<AtsVenta> getAllAtsVentas() {
+    public List<AtsVentaDto> getAllAtsVentas() {
         return atsService.getAllAtsVentas();
     }
 
     @GetMapping("/rendimientos")
-    public List<AtsRendimiento> getAllAtsRendimientos() {
+    public List<AtsRendimientoDto> getAllAtsRendimientos() {
         return atsService.getAllAtsRendimientos();
     }
 
     @GetMapping("/anulados")
-    public List<AtsAnulado> getAllAtsAnulados() {
+    public List<AtsAnuladoDto> getAllAtsAnulados() {
         return atsService.getAllAtsAnulados();
     }
 }

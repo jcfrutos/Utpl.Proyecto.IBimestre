@@ -1,13 +1,13 @@
-package com.ats.ats_api.model;
+package com.ats.ats_api.dtos;
 
-public class AtsRecap {
+public class AtsRecapDto {
     private String fecha;
     private String hora;
     private String tipo;
     private String descripcion;
     private String monto;
 
-    public AtsRecap(String fecha, String hora, String tipo, String descripcion, String monto) {
+    public AtsRecapDto(String fecha, String hora, String tipo, String descripcion, String monto) {
         this.fecha = fecha;
         this.hora = hora;
         this.tipo = tipo;

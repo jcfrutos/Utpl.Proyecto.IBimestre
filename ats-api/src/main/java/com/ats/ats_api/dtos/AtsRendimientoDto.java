@@ -1,11 +1,11 @@
-package com.ats.ats_api.model;
+package com.ats.ats_api.dtos;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-public class AtsRendimiento {
+public class AtsRendimientoDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

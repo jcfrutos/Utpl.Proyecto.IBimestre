@@ -1,13 +1,13 @@
 package com.ats.ats_api.service;
 
-import com.ats.ats_api.model.AtsCompra;
-import com.ats.ats_api.model.AtsVenta;
-import com.ats.ats_api.model.AtsRendimiento;
-import com.ats.ats_api.model.AtsAnulado;
-import com.ats.ats_api.model.AtsRecap;
 import com.ats.ats_api.repository.AtsCompraRepository;
 import com.ats.ats_api.repository.AtsVentaRepository;
 import com.ats.ats_api.repository.AtsRendimientoRepository;
+import com.ats.ats_api.dtos.AtsAnuladoDto;
+import com.ats.ats_api.dtos.AtsCompraDto;
+import com.ats.ats_api.dtos.AtsRecapDto;
+import com.ats.ats_api.dtos.AtsRendimientoDto;
+import com.ats.ats_api.dtos.AtsVentaDto;
 import com.ats.ats_api.repository.AtsAnuladoRepository;
 import com.ats.ats_api.repository.AtsRecapRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,23 +59,23 @@ public class AtsService {
 
     }
 
-    public List<AtsCompra> getAllAtsCompras() {
+    public List<AtsCompraDto> getAllAtsCompras() {
         return atsCompraRepository.findAll();
     }
 
-    public List<AtsVenta> getAllAtsVentas() {
+    public List<AtsVentaDto> getAllAtsVentas() {
         return atsVentaRepository.findAll();
     }
 
-    public List<AtsRendimiento> getAllAtsRendimientos() {
+    public List<AtsRendimientoDto> getAllAtsRendimientos() {
         return atsRendimientoRepository.findAll();
     }
 
-    public List<AtsAnulado> getAllAtsAnulados() {
+    public List<AtsAnuladoDto> getAllAtsAnulados() {
         return atsAnuladoRepository.findAll();
     }
 
-    public List<AtsRecap> getAllAtsRecaps() {
+    public List<AtsRecapDto> getAllAtsRecaps() {
         return atsRecapRepository.findAll();
     }
 }

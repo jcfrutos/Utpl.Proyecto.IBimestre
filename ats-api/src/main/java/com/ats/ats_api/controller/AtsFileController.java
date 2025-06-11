@@ -1,7 +1,6 @@
 package com.ats.ats_api.controller;
 
 import com.ats.ats_api.service.AtsService;
-
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
